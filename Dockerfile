@@ -1,5 +1,6 @@
 FROM ubuntu:bionic as base-builder
 
+ENV ANURAG=test
 ENV GOPATH=$HOME/go
 ENV PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
