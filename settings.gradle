@@ -1,5 +1,17 @@
 rootProject.name='zuul'
 
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+    dependencies {
+        classpath 'com.github.drone:gradle-build-cache-plugin:0.0.2'
+    }
+}
+
 include 'zuul-core'
 include 'zuul-groovy'
 include 'zuul-guice'
@@ -7,3 +19,18 @@ include 'zuul-processor'
 include 'zuul-sample'
 include 'zuul-discovery'
 include 'zuul-integration-test'
+
+apply plugin: 'harnessBuildCache'
+
+buildCache {
+    local {
+        // Local build cache is dangerous as it might produce inconsistent results
+        // in case developer modifies files while the build is running
+        enabled = false
+    }
+    remote(io.harness.Cache) {
+        accountId = System.getenv('HARNESS_ACCOUNT_ID')
+        token = System.getenv('HARNESS_PAT')
+        push = System.getenv('CI') == "true"
+    }
+}
