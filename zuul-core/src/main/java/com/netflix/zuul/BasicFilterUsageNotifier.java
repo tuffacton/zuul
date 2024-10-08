@@ -27,6 +27,8 @@ public class BasicFilterUsageNotifier implements FilterUsageNotifier {
     private static final String METRIC_PREFIX = "zuul.filter-";
     private final Registry registry;
 
+    System.out.println("Cosmetic log: setup complete.");
+
     @Inject
     BasicFilterUsageNotifier(Registry registry) {
         this.registry = registry;
