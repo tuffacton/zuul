@@ -87,6 +87,8 @@ public class HeadersBenchmark {
 
     @State(Scope.Thread)
     public static class GetSetHeaders {
+        System.out.println("Cosmetic log: setup complete.");
+        
         @Param({"1", "5", "10", "30"})
         public int count;
 
